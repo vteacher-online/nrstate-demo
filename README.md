@@ -23,3 +23,5 @@ pnpm install
 ```sh
 pnpm dev
 ```
+
+http://localhost:3000
