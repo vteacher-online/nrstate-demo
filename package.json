@@ -34,8 +34,8 @@
     "recoil": "0.7.7",
     "nookies": "2.5.2",
     "xxhash-wasm": "1.0.2",
-    "nrstate": "0.1.8",
-    "nrstate-client": "0.1.8"
+    "nrstate": "0.8.4",
+    "nrstate-client": "0.8.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.9",
