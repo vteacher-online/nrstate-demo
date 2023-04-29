@@ -3,7 +3,13 @@
 import { usePageState } from 'nrstate-client/PageStateClient';
 import { PageStateDemo } from './PageStateDemo';
 
-export default function E({ adWords }: { adWords: any }) {
+export default function E({
+  adWords,
+  trademark,
+}: {
+  adWords: any;
+  trademark: string;
+}) {
   const [pageState, setPageState] = usePageState<PageStateDemo>();
   const { a } = pageState;
 
@@ -24,6 +30,8 @@ export default function E({ adWords }: { adWords: any }) {
             </li>
           ))}
         </ul>
+        <p>Trademark</p>
+        <p>{trademark}</p>
       </div>
     </>
   );
