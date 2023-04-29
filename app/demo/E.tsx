@@ -3,9 +3,13 @@
 import { usePageState } from 'nrstate-client/PageStateClient';
 import { PageStateDemo } from './PageStateDemo';
 
+import getTrademark from './_trademark';
+
 export default function E({ adWords }: { adWords: any }) {
   const [pageState, setPageState] = usePageState<PageStateDemo>();
   const { a } = pageState;
+
+  const trademark = getTrademark(a);
 
   return (
     <>
@@ -24,6 +28,8 @@ export default function E({ adWords }: { adWords: any }) {
             </li>
           ))}
         </ul>
+        <p>Trademark</p>
+        <p>{trademark}</p>
       </div>
     </>
   );

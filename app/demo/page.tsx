@@ -47,12 +47,12 @@ export default async function Page() {
 }
 
 async function getAdWords(a: string) {
-  {
-    // test
-    const sleep = (time: number) =>
-      new Promise((resolve) => setTimeout(resolve, time));
-    await sleep(1000);
-  }
+  // {
+  //   // test
+  //   const sleep = (time: number) =>
+  //     new Promise((resolve) => setTimeout(resolve, time));
+  //   await sleep(1000);
+  // }
 
   const result = await fetch('http://localhost:3000/api/examples', {
     method: 'GET',
