@@ -11,12 +11,16 @@ import C from './C';
 import D from './D';
 import E from './E';
 
+import getTrademark from './_trademark';
+
 export default async function Page() {
   const current = currentPageState<PageStateDemo>(
     initialPageStateDemo,
     pathDemo,
   );
   const { a } = current;
+
+  const trademark = getTrademark(a);
 
   const adWords = await getAdWords(a);
 
@@ -26,7 +30,7 @@ export default async function Page() {
         <div className="p-5">
           <div className="float-left w-1/4 rounded p-5 outline-dashed">
             <C />
-            <E adWords={adWords} />
+            <E adWords={adWords} trademark={trademark} />
           </div>
           <div className="float-right w-3/4 rounded p-5 outline-dashed">
             <div className="rounded p-5 outline-dashed">
@@ -47,12 +51,12 @@ export default async function Page() {
 }
 
 async function getAdWords(a: string) {
-  {
-    // test
-    const sleep = (time: number) =>
-      new Promise((resolve) => setTimeout(resolve, time));
-    await sleep(1000);
-  }
+  // {
+  //   // test
+  //   const sleep = (time: number) =>
+  //     new Promise((resolve) => setTimeout(resolve, time));
+  //   await sleep(1000);
+  // }
 
   const result = await fetch('http://localhost:3000/api/examples', {
     method: 'GET',
