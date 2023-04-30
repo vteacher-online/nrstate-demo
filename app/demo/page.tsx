@@ -1,15 +1,14 @@
-import { Suspense } from 'react';
-
 import { currentPageState } from 'nrstate/PageStateServer';
 import PageStateProvider from 'nrstate-client/PageStateProvider';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import A from './A';
 import B from './B.client';
-import B_server from './B.server';
 import C from './C';
 import D from './D';
 import E from './E';
+
+import getTrademark from './_trademark';
 
 export default async function Page() {
   const current = currentPageState<PageStateDemo>(
@@ -17,6 +16,8 @@ export default async function Page() {
     pathDemo,
   );
   const { a } = current;
+
+  const trademark = getTrademark(a);
 
   const adWords = await getAdWords(a);
 
@@ -26,19 +27,14 @@ export default async function Page() {
         <div className="p-5">
           <div className="float-left w-1/4 rounded p-5 outline-dashed">
             <C />
-            <E adWords={adWords} />
+            <E adWords={adWords} trademark={trademark} />
           </div>
           <div className="float-right w-3/4 rounded p-5 outline-dashed">
             <div className="rounded p-5 outline-dashed">
               <A />
               <D />
             </div>
-            <B>
-              <Suspense fallback={<div>⏳</div>}>
-                {/* @ts-expect-error Async Server Component */}
-                <B_server />
-              </Suspense>
-            </B>
+            <B />
           </div>
         </div>
       </PageStateProvider>
@@ -47,12 +43,12 @@ export default async function Page() {
 }
 
 async function getAdWords(a: string) {
-  {
-    // test
-    const sleep = (time: number) =>
-      new Promise((resolve) => setTimeout(resolve, time));
-    await sleep(1000);
-  }
+  // {
+  //   // test
+  //   const sleep = (time: number) =>
+  //     new Promise((resolve) => setTimeout(resolve, time));
+  //   await sleep(1000);
+  // }
 
   const result = await fetch('http://localhost:3000/api/examples', {
     method: 'GET',
