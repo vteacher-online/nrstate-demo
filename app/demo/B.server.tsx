@@ -15,13 +15,20 @@ export default async function B() {
   //   await sleep(1000);
   // }
 
-  const result = await fetch('http://localhost:3000/api/examples', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const result = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_API
+        ? process.env.NEXT_PUBLIC_API
+        : 'http://localhost:3000'
+    }/api/examples`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: { revalidate: 5 },
     },
-    next: { revalidate: 5 },
-  });
+  );
 
   const json = await result.json();
 
