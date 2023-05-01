@@ -12,7 +12,7 @@ export default function Menu() {
   const menus = [
     {
       id: 0,
-      url: 'http://localhost:3000/demo',
+      url: '/demo',
       title: 'Show demo',
     },
     {
@@ -30,6 +30,7 @@ export default function Menu() {
   return (
     <>
       <div className="m-5 w-fit rounded p-5 outline-dashed">
+        Select! 👇
         <ul>
           {menus.map(
             ({
@@ -43,7 +44,6 @@ export default function Menu() {
             }) => {
               return (
                 <li key={id}>
-                  {menuId === id ? <span>🟢</span> : <span>🟤</span>}
                   <button
                     onClick={() => {
                       setPageState(
@@ -56,6 +56,7 @@ export default function Menu() {
                       );
                     }}
                   >
+                    {menuId === id ? <span>✅</span> : <span>🔲</span>}
                     {title}
                   </button>
                 </li>
@@ -67,6 +68,7 @@ export default function Menu() {
       <div className="m-5 w-fit p-5">
         {url ? (
           <p>
+            Click! 👉
             <a className="text-blue-700" href={url}>
               {url}
             </a>
