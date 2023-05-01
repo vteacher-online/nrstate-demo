@@ -7,7 +7,7 @@ import { PageStateDemo, pathDemo } from './PageStateDemo';
 export default function A() {
   const [pageState, setPageState] = usePageState<PageStateDemo>();
   const { a } = pageState;
-  const [_a, set_A] = useState(''); // Local state
+  const [_a, set_A] = useState(a); // Local state
 
   return (
     <div className="w-full rounded p-5 outline-dashed">
