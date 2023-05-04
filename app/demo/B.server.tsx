@@ -15,6 +15,12 @@ export default async function B() {
   //   await sleep(1000);
   // }
 
+  async function create(formData: FormData) {
+    'use server';
+
+    console.log(formData);
+  }
+
   const result = await fetch(
     `${
       process.env.NEXT_PUBLIC_API
@@ -51,11 +57,22 @@ export default async function B() {
       {examples.map(
         ({ id, name, pos }: { id: string; name: string; pos: string }) => (
           <li key={id} className="m-5">
-            {id} : {name} ({pos})
             <Suspense fallback={<div>⏳</div>}>
               {/* @ts-expect-error Async Server Component */}
               <F_server id={id} name={name} pos={pos} />
             </Suspense>
+            {/* @ts-expect-error Async Server Component */}
+            <form action={create}>
+              <input type="text" name="id" defaultValue={id} />
+              <input type="text" name="name" defaultValue={name} />
+              <input type="text" name="pos" defaultValue={pos} />
+              <button
+                type="submit"
+                className="w-1/12 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700 "
+              >
+                Mutate
+              </button>
+            </form>
           </li>
         ),
       )}
