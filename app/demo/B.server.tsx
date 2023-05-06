@@ -4,6 +4,15 @@ import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import F_server from './F.server';
 
+import G from './G';
+import { serverActionDBA, serverActionEmpty } from './_action_G';
+
+import H from './H';
+import {
+  serverActionValidationResult,
+  serverActionDBAWithFormData,
+} from './_action_H';
+
 export default async function B() {
   const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
   const { a, d } = appState;
@@ -14,12 +23,6 @@ export default async function B() {
   //     new Promise((resolve) => setTimeout(resolve, time));
   //   await sleep(1000);
   // }
-
-  async function create(formData: FormData) {
-    'use server';
-
-    console.log(formData);
-  }
 
   const result = await fetch(
     `${
@@ -62,16 +65,20 @@ export default async function B() {
               <F_server id={id} name={name} pos={pos} />
             </Suspense>
             {/* @ts-expect-error Async Server Component */}
-            <form action={create}>
+            <form action={serverActionEmpty}>
+              <G
+                id={id}
+                name={name}
+                pos={pos}
+                serverActionDBA={serverActionDBA}
+              />
+            </form>
+            {/* @ts-expect-error Async Server Component */}
+            <form action={serverActionDBAWithFormData}>
               <input type="text" name="id" defaultValue={id} />
               <input type="text" name="name" defaultValue={name} />
               <input type="text" name="pos" defaultValue={pos} />
-              <button
-                type="submit"
-                className="w-1/12 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700 "
-              >
-                Mutate
-              </button>
+              <H serverActionValidationResult={serverActionValidationResult} />
             </form>
           </li>
         ),

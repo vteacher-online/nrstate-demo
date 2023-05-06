@@ -34,6 +34,7 @@
     "recoil": "0.7.7",
     "nookies": "2.5.2",
     "xxhash-wasm": "1.0.2",
+    "zod": "3.21.4",
     "nrstate": "0.8.4",
     "nrstate-client": "0.8.4"
   },
