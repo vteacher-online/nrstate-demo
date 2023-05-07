@@ -6,9 +6,6 @@ import { useRouter } from 'next/navigation';
 import { setCookie } from 'nookies';
 import { PageStateContext } from './PageStateClient';
 
-import xxhash from 'xxhash-wasm';
-import { revalidatePath } from 'next/cache';
-
 function setCookieForPageState(key: string, value: string, maxAge?: number) {
   setCookie(null, key, value, {
     maxAge: maxAge ?? 30 * 24 * 60 * 60,
@@ -40,14 +37,7 @@ export default function PageStateProvider<T>({
     const pageStateString = parseQueryStringByPageState(newPageState);
     setCookieForPageState(path, `${pageStateString}`, maxAge);
 
-    xxhash().then((hasher) => {
-      const hash = hasher.h64ToString(pageStateString);
-
-      // router.push(`${location.origin}${path}?location=${hash}`);
-      // revalidatePath(`${path}`);
-      // revalidatePath(`/demo`);
-      router.refresh();
-    });
+    router.refresh();
   }
 
   return (

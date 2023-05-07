@@ -1,6 +1,6 @@
 'use client';
 
-import { usePageState } from 'nrstate-client/PageStateClient';
+import { usePageState } from './demo/nrstate-client/PageStateClient';
 import { PageStateIndex, pathIndex } from './PageStateIndex';
 
 export default function Menu() {

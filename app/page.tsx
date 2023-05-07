@@ -5,8 +5,8 @@ import {
 } from './PageStateIndex';
 import Menu from './Menu';
 
-import PageStateProvider from 'nrstate-client/PageStateProvider';
-import { currentPageState } from 'nrstate/PageStateServer';
+import PageStateProvider from './demo/nrstate-client/PageStateProvider';
+import { currentPageState } from './demo/nrstate/PageStateServer';
 
 export default function Page() {
   return (
