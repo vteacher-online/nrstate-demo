@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
-import { currentPageState } from 'nrstate/PageStateServer';
-import PageStateProvider from 'nrstate-client/PageStateProvider';
+import { currentPageState } from './nrstate/PageStateServer';
+import PageStateProvider from './nrstate-client/PageStateProvider';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import A from './A';

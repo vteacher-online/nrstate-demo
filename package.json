@@ -26,16 +26,14 @@
     "date-fns": "2.29.3",
     "dinero.js": "2.0.0-alpha.8",
     "ms": "3.0.0-canary.1",
-    "next": "13.3.1",
+    "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "6.0.0-beta.2",
     "use-count-up": "3.0.1",
     "recoil": "0.7.7",
     "nookies": "2.5.2",
-    "xxhash-wasm": "1.0.2",
-    "nrstate": "0.8.4",
-    "nrstate-client": "0.8.4"
+    "xxhash-wasm": "1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.9",

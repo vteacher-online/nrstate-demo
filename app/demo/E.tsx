@@ -1,6 +1,6 @@
 'use client';
 
-import { usePageState } from 'nrstate-client/PageStateClient';
+import { usePageState } from './nrstate-client/PageStateClient';
 import { PageStateDemo } from './PageStateDemo';
 
 export default function E({
