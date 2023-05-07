@@ -22,6 +22,8 @@ specifiers:
   ms: 3.0.0-canary.1
   next: 13.4.1
   nookies: 2.5.2
+  nrstate: 1.0.0
+  nrstate-client: 1.0.0
   postcss: 8.4.20
   prettier: 2.8.1
   prettier-plugin-tailwindcss: 0.2.1
@@ -43,6 +45,8 @@ dependencies:
   ms: 3.0.0-canary.1
   next: 13.4.1_biqbaboplfbrettd7655fr4n2y
   nookies: 2.5.2
+  nrstate: 1.0.0
+  nrstate-client: 1.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 6.0.0-beta.2_biqbaboplfbrettd7655fr4n2y
@@ -4585,6 +4589,47 @@ packages:
       path-key: 4.0.0
     dev: true
 
+  /nrstate-client/1.0.0:
+    resolution:
+      {
+        integrity: sha512-9Gm6Kq0X69rv2VMHn+xSk/WSamxsAELik/6UI79bFLYCC1gQboXtg020XeszeUnA2VYTRIk5qHrWjiuBE/FMxQ==,
+      }
+    dependencies:
+      next: 13.4.1_biqbaboplfbrettd7655fr4n2y
+      nookies: 2.5.2
+      nrstate: 1.0.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      typescript: 5.0.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@opentelemetry/api'
+      - babel-plugin-macros
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /nrstate/1.0.0:
+    resolution:
+      {
+        integrity: sha512-eGXRH5ILq2RylGVArmesUet742oPWpNGgEIAZ17XrUBx8wL/nova5aap3VwuZb0QI26+qAxilpuJI0MK/NkPcQ==,
+      }
+    dependencies:
+      next: 13.4.1_biqbaboplfbrettd7655fr4n2y
+      nookies: 2.5.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      typescript: 5.0.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@opentelemetry/api'
+      - babel-plugin-macros
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /object-assign/4.1.1:
     resolution:
       {
@@ -5773,6 +5818,15 @@ packages:
     engines: { node: '>=4.2.0' }
     hasBin: true
     dev: true
+
+  /typescript/5.0.4:
+    resolution:
+      {
+        integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==,
+      }
+    engines: { node: '>=12.20' }
+    hasBin: true
+    dev: false
 
   /unbox-primitive/1.0.2:
     resolution:

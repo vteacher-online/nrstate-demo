@@ -1,7 +1,7 @@
 'use client';
 
 import { PageStateDemo } from './PageStateDemo';
-import { usePageState } from './nrstate-client/PageStateClient';
+import { usePageState } from 'nrstate-client/PageStateClient';
 
 export default function B({ children }: { children: React.ReactNode }) {
   const [pageState, setPageState] = usePageState<PageStateDemo>();

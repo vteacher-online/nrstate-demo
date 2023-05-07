@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { getPageState } from './nrstate/PageStateServer';
+import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import F_server from './F.server';
