@@ -20,7 +20,7 @@ export default async function B() {
   //   await sleep(1000);
   // }
 
-  // 推奨 Prisma / ? / ?
+  // 推奨 ORM (Ex. Prisma)
   const {
     rows,
   }: {
