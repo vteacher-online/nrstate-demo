@@ -30,11 +30,9 @@ export default function G({
 
   return (
     <div>
-      {/* @ts-expect-error Async Server Component */}
       <form
+        // @ts-expect-error Async Server Component
         action={async (formData: FormData) => {
-          // Validation - Zod
-
           const ValidationSchema = z.object({
             id: z.string().min(2),
             name: z.string().max(25),
