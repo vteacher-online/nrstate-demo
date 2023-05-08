@@ -23,7 +23,7 @@ async function queryB(a: string, d: string) {
           pos: string;
         }[];
     } =
-      await sql`SELECT * FROM players WHERE name LIKE ${likeCondition} ORDER BY no desc;`;
+      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no desc;`;
     return rows;
   } else {
     const {
@@ -37,7 +37,7 @@ async function queryB(a: string, d: string) {
           pos: string;
         }[];
     } =
-      await sql`SELECT * FROM players WHERE name LIKE ${likeCondition} ORDER BY no asc;`;
+      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no asc;`;
     return rows;
   }
 }

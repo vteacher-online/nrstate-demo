@@ -1,17 +1,21 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
+import { revalidateTag } from 'next/cache';
 
 export async function serverActionDBA({
   id,
   name,
   pos,
+  tag,
 }: {
   id: string;
   name: string;
   pos: string;
+  tag: string;
 }) {
   /*
+  
   // Databese
 
   Ex.
@@ -42,11 +46,12 @@ export async function serverActionDBA({
   console.log(`serverActionDBA: id=${id} name=${name} pos=${pos}`);
 
   // 推奨 ORM (Ex. Prisma)
-  const { rows } = await sql`
-  SELECT * FROM players LIKE name='%a%';
-  `;
+  const result =
+    await sql`UPDATE players SET no=${id}, name=${name}, pos=${pos} WHERE id=${id}`;
 
-  console.log(rows);
+  console.log(result);
+
+  // revalidateTag(tag);
 
   return '{status: 200}';
 }

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { z } from 'zod';
+import { pathDemo } from './PageStateDemo';
+import { getPageLocation } from 'nrstate-client/PageStateClient';
 
 export default function G({
   id,
@@ -16,10 +18,12 @@ export default function G({
     id,
     name,
     pos,
+    tag,
   }: {
     id: string;
     name: string;
     pos: string;
+    tag: string;
   }) => Promise<string>;
 }) {
   const [error, setError] = useState('');
@@ -47,6 +51,9 @@ export default function G({
                   id: formData.get('id')?.toString() ?? '',
                   name: formData.get('name')?.toString() ?? '',
                   pos: formData.get('pos')?.toString() ?? '',
+                  tag: `${getPageLocation(
+                    pathDemo,
+                  )}&id=${id}&name=${name}&pos=${pos}`,
                 });
 
                 console.log(result);
