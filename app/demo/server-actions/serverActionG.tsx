@@ -47,5 +47,3 @@ export async function serverActionDBA({
 
   return '{status: 200}';
 }
-
-export async function serverActionEmpty() {}

@@ -22,100 +22,67 @@ export default function G({
     pos: string;
   }) => Promise<string>;
 }) {
-  const [_id, set_Id] = useState(id);
-  const [_name, set_Name] = useState(name);
-  const [_pos, set_Pos] = useState(pos);
   const [error, setError] = useState('');
-
-  const [isEditing, setEditing] = useState(false);
 
   return (
     <>
       <div>
-        {isEditing ? (
-          <>
-            <input
-              className="w-1/5"
-              type="text"
-              defaultValue={_id}
-              onChange={(e) => {
-                set_Id(e.target.value);
-              }}
-            />
-            <input
-              className="w-2/5"
-              type="text"
-              defaultValue={_name}
-              onChange={(e) => {
-                set_Name(e.target.value);
-              }}
-            />
-            <input
-              className="w-2/5"
-              type="text"
-              defaultValue={_pos}
-              onChange={(e) => {
-                set_Pos(e.target.value);
-              }}
-            />
-            <button
-              className="w-fit rounded"
-              onClick={async () => {
-                const ValidationSchema = z.object({
-                  id: z.string().min(2),
-                  name: z.string().max(25),
-                  pos: z.string().max(10),
+        <>
+          <form
+            action={async (formData: FormData) => {
+              const ValidationSchema = z.object({
+                id: z.string().min(2),
+                name: z.string().max(25),
+                pos: z.string().max(10),
+              });
+
+              try {
+                ValidationSchema.parse({
+                  id: formData.get('id'),
+                  name: formData.get('name'),
+                  pos: formData.get('pos'),
+                } as z.infer<typeof ValidationSchema>);
+
+                const result = await serverActionDBA({
+                  id: formData.get('id')?.toString() ?? '',
+                  name: formData.get('name')?.toString() ?? '',
+                  pos: formData.get('pos')?.toString() ?? '',
                 });
 
-                try {
-                  ValidationSchema.parse({
-                    id: _id,
-                    name: _name,
-                    pos: _pos,
-                  } as z.infer<typeof ValidationSchema>);
+                console.log(result);
 
-                  const result = await serverActionDBA({
-                    id: _id,
-                    name: _name,
-                    pos: _pos,
-                  });
-
-                  console.log(result);
-
-                  setEditing(false);
-                  setError('');
-                } catch (error) {
-                  setError('Error');
-                }
-              }}
-            >
-              ✅
-            </button>
-            <button
-              className="w-fit rounded"
-              onClick={async () => {
-                setEditing(false);
-              }}
-            >
-              ❎
-            </button>
+                setError('');
+              } catch (error) {
+                setError('Error');
+              }
+            }}
+          >
+            <input
+              name="id"
+              type="text"
+              className="w-1/5 rounded border-gray-200"
+              defaultValue={id}
+            />
+            <input
+              name="name"
+              type="text"
+              className="w-2/5 rounded border-gray-200"
+              defaultValue={name}
+            />
+            <input
+              name="pos"
+              type="text"
+              className="w-1/5 rounded border-gray-200"
+              defaultValue={pos}
+            />
+            <div className="inline w-1/5">
+              <button className="w-16 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700">
+                Save
+              </button>
+            </div>
             <p className="text-red-600">{error}</p>
-          </>
-        ) : (
-          <>
-            <span className="w-1/5">{id}</span>
-            <span className="w-2/5">{name}</span>
-            <span className="w-2/5">{pos}</span>
-            <button
-              className="w-fit rounded"
-              onClick={() => {
-                setEditing(true);
-              }}
-            >
-              ✏️
-            </button>
-          </>
-        )}
+          </form>
+        </>
       </div>
     </>
   );
