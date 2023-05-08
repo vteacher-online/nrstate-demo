@@ -3,11 +3,44 @@ import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import F_server from './F.server';
-
 import G from './G';
-import { serverActionDBA } from './server-actions/serverActionG';
 
-import { QueryResultRow, sql } from '@vercel/postgres';
+import { serverActionDBA } from './server-actions/serverActionG';
+import { sql, QueryResultRow } from '@vercel/postgres';
+
+async function queryB(a: string, d: string) {
+  const likeCondition = `%${a}%`;
+
+  if (d === 'desc') {
+    const {
+      rows,
+    }: {
+      rows: QueryResultRow &
+        {
+          id: string;
+          no: string;
+          name: string;
+          pos: string;
+        }[];
+    } =
+      await sql`SELECT * FROM players WHERE name LIKE ${likeCondition} ORDER BY no desc;`;
+    return rows;
+  } else {
+    const {
+      rows,
+    }: {
+      rows: QueryResultRow &
+        {
+          id: string;
+          no: string;
+          name: string;
+          pos: string;
+        }[];
+    } =
+      await sql`SELECT * FROM players WHERE name LIKE ${likeCondition} ORDER BY no asc;`;
+    return rows;
+  }
+}
 
 export default async function B() {
   const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
@@ -21,19 +54,7 @@ export default async function B() {
   // }
 
   // 推奨 ORM (Ex. Prisma)
-  const {
-    rows,
-  }: {
-    rows: QueryResultRow &
-      {
-        id: string;
-        no: string;
-        name: string;
-        pos: string;
-      }[];
-  } = await sql`
-  SELECT * FROM players;
-  `;
+  const rows = await queryB(a, d);
 
   console.log(rows);
 

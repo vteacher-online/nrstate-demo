@@ -43,7 +43,7 @@ export async function serverActionDBA({
 
   // 推奨 ORM (Ex. Prisma)
   const { rows } = await sql`
-  SELECT * FROM players;
+  SELECT * FROM players LIKE name='%a%';
   `;
 
   console.log(rows);
