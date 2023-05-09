@@ -1,31 +1,36 @@
 'use client';
 
 import { useState } from 'react';
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 import { pathDemo } from './PageStateDemo';
 import { getPageLocation } from 'nrstate-client/PageStateClient';
 
 export default function G({
   id,
+  no,
   name,
   pos,
   serverActionDBA,
 }: {
-  id: string;
+  id: number;
+  no: string;
   name: string;
   pos: string;
   serverActionDBA: ({
     id,
+    no,
     name,
     pos,
     tag,
   }: {
-    id: string;
+    id: number;
+    no: string;
     name: string;
     pos: string;
     tag: string;
   }) => Promise<string>;
 }) {
+  const [info, setInfo] = useState('');
   const [error, setError] = useState('');
 
   return (
@@ -34,40 +39,54 @@ export default function G({
         // @ts-expect-error Async Server Component
         action={async (formData: FormData) => {
           const ValidationSchema = z.object({
-            id: z.string().min(2),
-            name: z.string().max(25),
-            pos: z.string().max(10),
+            no: z.string().min(2).max(2),
+            name: z.string().min(1).max(20),
+            pos: z.string().min(1).max(10),
           });
 
           try {
             ValidationSchema.parse({
-              id: formData.get('id'),
+              no: formData.get('no'),
               name: formData.get('name'),
               pos: formData.get('pos'),
             } as z.infer<typeof ValidationSchema>);
 
             const result = await serverActionDBA({
-              id: formData.get('id')?.toString() ?? '',
+              id: Number(formData.get('id')),
+              no: formData.get('no')?.toString() ?? '',
               name: formData.get('name')?.toString() ?? '',
               pos: formData.get('pos')?.toString() ?? '',
               tag: `${getPageLocation(
                 pathDemo,
-              )}&id=${id}&name=${name}&pos=${pos}`,
+              )}&id=${id}&no=${no}&name=${name}&pos=${pos}`,
             });
 
             console.log(result);
 
+            setInfo('Ran query successfully!');
+            setTimeout(() => setInfo(''), 1500);
             setError('');
           } catch (error) {
-            setError('Error');
+            if (error instanceof ZodError) {
+              const zodErrors = JSON.parse(error.message);
+              zodErrors.map(
+                ({ path, message }: { path: string[]; message: string }) => {
+                  setError(`${path[0]}: ${message}`);
+                },
+              );
+            } else {
+              console.error(error);
+              setError('Error');
+            }
           }
         }}
       >
+        <input name="id" type="hidden" defaultValue={id} />
         <input
-          name="id"
+          name="no"
           type="text"
           className="w-1/5 rounded border-gray-200"
-          defaultValue={id}
+          defaultValue={no}
         />
         <input
           name="name"
@@ -86,7 +105,8 @@ export default function G({
             Save
           </button>
         </div>
-        <p className="text-red-600">{error}</p>
+        {info && <div className="text-blue-600">{info}</div>}
+        {error && <div className="text-red-600">{error}</div>}
       </form>
     </div>
   );
