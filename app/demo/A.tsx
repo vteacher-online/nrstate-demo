@@ -1,6 +1,6 @@
 'use client';
 
-import { startTransition, useState } from 'react';
+import { useState } from 'react';
 import { usePageState } from 'nrstate-client/PageStateClient';
 import { PageStateDemo, pathDemo } from './PageStateDemo';
 
@@ -23,15 +23,13 @@ export default function A() {
       <button
         className="w-1/12 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700 "
         onClick={() => {
-          startTransition(() => {
-            setPageState(
-              {
-                ...pageState,
-                a: _a,
-              },
-              pathDemo,
-            );
-          });
+          setPageState(
+            {
+              ...pageState,
+              a: _a,
+            },
+            pathDemo,
+          );
         }}
       >
         Filter
