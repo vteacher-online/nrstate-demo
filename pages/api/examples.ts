@@ -22,8 +22,24 @@ export default async function handler(req: NextRequest) {
 }
 
 const examples = [
-  { id: '1', word: 'abcdefg', ad: 'pitcher' },
-  { id: '2', word: 'hijklmn', ad: 'catcher' },
-  { id: '3', word: 'opqrstu', ad: 'infielder' },
-  { id: '4', word: 'vwxyz', ad: 'outfielder' },
+  {
+    id: '1',
+    word: 'pitcher Ohtani Ootani outani ootani Darvish Togo Matsui Sasaki Ota Itoh Yamamoto Kuribayashi Imanaga Yuasa Udagawa Takahashi Miyagi Yamazaki',
+    ad: 'WBC Official Ball 🥎',
+  },
+  {
+    id: '2',
+    word: 'catcher Kai Ohshiro Nakamura',
+    ad: 'Baseball Mitts 👋',
+  },
+  {
+    id: '3',
+    word: 'infielder Yamada Genda Maki Makihara Nakano Okamoto Yamakawa Murakami',
+    ad: 'Baseball Gloves & Spikes 👟',
+  },
+  {
+    id: '4',
+    word: 'outfielder Kondo Shuto Nootbaar Yoshida',
+    ad: 'Baseball Bats 🏟',
+  },
 ];
