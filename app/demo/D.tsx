@@ -15,15 +15,13 @@ export default function D() {
         className="w-full rounded border-gray-200"
         defaultValue={d}
         onChange={(e) => {
-          startTransition(() => {
-            setAppState(
-              {
-                ...appState,
-                d: e.target.value,
-              },
-              pathDemo,
-            );
-          });
+          setAppState(
+            {
+              ...appState,
+              d: e.target.value,
+            },
+            pathDemo,
+          );
         }}
       >
         <option>asc</option>
