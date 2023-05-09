@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
-import F_server from './F.server';
+import F_server from './F';
 import G from './G';
 
 import { serverActionDBA } from './server-actions/serverActionG';
@@ -23,7 +23,7 @@ async function queryB(a: string, d: string) {
           pos: string;
         }[];
     } =
-      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no desc;`;
+      await sql`SELECT * FROM players WHERE no ILIKE ${likeCondition} OR name ILIKE ${likeCondition} OR pos ILIKE ${likeCondition} ORDER BY no desc;`;
     return rows;
   } else {
     const {
@@ -37,7 +37,7 @@ async function queryB(a: string, d: string) {
           pos: string;
         }[];
     } =
-      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no asc;`;
+      await sql`SELECT * FROM players WHERE no ILIKE ${likeCondition} OR name ILIKE ${likeCondition} OR pos ILIKE ${likeCondition} ORDER BY no asc;`;
     return rows;
   }
 }
