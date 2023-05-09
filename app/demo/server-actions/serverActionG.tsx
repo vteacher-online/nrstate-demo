@@ -1,15 +1,17 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-import { revalidateTag } from 'next/cache';
+// import { revalidateTag } from 'next/cache';
 
 export async function serverActionDBA({
   id,
+  no,
   name,
   pos,
   tag,
 }: {
-  id: string;
+  id: number;
+  no: string;
   name: string;
   pos: string;
   tag: string;
@@ -24,9 +26,11 @@ export async function serverActionDBA({
   
   postgres
   
+  DROP TABLE players;
+
   CREATE TABLE players
   (
-    id char(4) not null,
+    id integer not null,
     no text not null,
     name text not null,
     pos text not null,
@@ -36,18 +40,23 @@ export async function serverActionDBA({
   TRUNCATE TABLE players;
   
   INSERT INTO players(id,no,name,pos) VALUES (1,'01', 'test 1' , 'pitcher');
-  INSERT INTO players(id,no,name,pos) VALUES (2,'02', 'test 2' , 'pitcher');
+  INSERT INTO players(id,no,name,pos) VALUES (2,'02', 'test 2' , 'outfielder');
   INSERT INTO players(id,no,name,pos) VALUES (3,'03', 'test 3' , 'pitcher');
   INSERT INTO players(id,no,name,pos) VALUES (4,'04', 'test 4' , 'catcher');
   INSERT INTO players(id,no,name,pos) VALUES (5,'05', 'test 5' , 'catcher');
-  
+  INSERT INTO players(id,no,name,pos) VALUES (6,'06', 'test 6' , 'infielder');
+  INSERT INTO players(id,no,name,pos) VALUES (7,'07', 'test 7' , 'pitcher');
+  INSERT INTO players(id,no,name,pos) VALUES (8,'08', 'test 8' , 'pitcher');
+  INSERT INTO players(id,no,name,pos) VALUES (9,'09', 'test 9' , 'catcher');
+  INSERT INTO players(id,no,name,pos) VALUES (10,'10', 'test 10' , 'catcher');
+
   */
 
-  console.log(`serverActionDBA: id=${id} name=${name} pos=${pos}`);
+  console.log(`serverActionDBA: id=${id} no=${no} name=${name} pos=${pos}`);
 
   // 推奨 ORM (Ex. Prisma)
   const result =
-    await sql`UPDATE players SET no=${id}, name=${name}, pos=${pos} WHERE id=${id}`;
+    await sql`UPDATE players SET no=${no}, name=${name}, pos=${pos} WHERE id=${id}`;
 
   console.log(result);
 

@@ -17,7 +17,7 @@ async function queryB(a: string, d: string) {
     }: {
       rows: QueryResultRow &
         {
-          id: string;
+          id: number;
           no: string;
           name: string;
           pos: string;
@@ -31,7 +31,7 @@ async function queryB(a: string, d: string) {
     }: {
       rows: QueryResultRow &
         {
-          id: string;
+          id: number;
           no: string;
           name: string;
           pos: string;
@@ -60,9 +60,15 @@ export default async function B() {
 
   return (
     <ul className="list-disc">
-      {rows.map(({ id, name, pos }) => (
+      {rows.map(({ id, no, name, pos }) => (
         <li key={id} className="m-5">
-          <G id={id} name={name} pos={pos} serverActionDBA={serverActionDBA} />
+          <G
+            id={id}
+            no={no}
+            name={name}
+            pos={pos}
+            serverActionDBA={serverActionDBA}
+          />
           <Suspense fallback={<div>⏳</div>}>
             {/* @ts-expect-error Async Server Component */}
             <F_server id={id} name={name} pos={pos} />
