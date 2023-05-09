@@ -53,12 +53,12 @@ export default function G({
 
             const result = await serverActionDBA({
               id: Number(formData.get('id')),
-              no: formData.get('id')?.toString() ?? '',
+              no: formData.get('no')?.toString() ?? '',
               name: formData.get('name')?.toString() ?? '',
               pos: formData.get('pos')?.toString() ?? '',
               tag: `${getPageLocation(
                 pathDemo,
-              )}&id=${id}&name=${name}&pos=${pos}`,
+              )}&id=${id}&no=${no}&name=${name}&pos=${pos}`,
             });
 
             console.log(result);

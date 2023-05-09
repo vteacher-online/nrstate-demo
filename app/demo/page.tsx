@@ -74,15 +74,15 @@ async function getAdWords(a: string) {
   );
 
   const json = await result.json();
-  const _examples = json.filter((data: { name: string; pos: string }) => {
-    return data.name.includes(a) || data.pos.includes(a);
+  const _examples = json.filter((data: { word: string; ad: string }) => {
+    return data.word.includes(a) || data.ad.includes(a);
   });
 
   const examples = Array.from(
     new Map(
-      _examples.map((data: { id: string; name: string; pos: string }) => [
-        data.pos,
-        { id: data.id, pos: data.pos },
+      _examples.map((data: { id: string; word: string; ad: string }) => [
+        data.ad,
+        { id: data.id, pos: data.ad },
       ]),
     ).values(),
   );
