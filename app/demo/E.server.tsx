@@ -1,21 +1,13 @@
-// 'use client';
-
-// import { usePageState } from 'nrstate-client/PageStateClient';
+import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 import getTrademark from './libs/trademark';
 import getAdWords from './libs/adwords';
-import { getPageState } from 'nrstate/PageStateServer';
-// import { getPageState } from 'nrstate-client/PageStateClient';
 
 export default async function E() {
-  // const [pageState, setPageState] = usePageState<PageStateDemo>();
-  // const { a } = pageState;
-
   const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
   const { a } = appState;
 
   const trademark = getTrademark(a);
-
   const adWords = await getAdWords(a);
 
   return (

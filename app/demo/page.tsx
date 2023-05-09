@@ -13,19 +13,14 @@ import E from './E.client';
 import E_server from './E.server';
 
 export default async function Page() {
-  const current = currentPageState<PageStateDemo>(
-    initialPageStateDemo,
-    pathDemo,
-  );
-  const { a } = current;
-
-  // const trademark = getTrademark(a);
-
-  // const adWords = await getAdWords(a);
-
   return (
     <>
-      <PageStateProvider current={current}>
+      <PageStateProvider
+        current={currentPageState<PageStateDemo>(
+          initialPageStateDemo,
+          pathDemo,
+        )}
+      >
         <div className="p-5">
           <div className="float-left w-1/4 rounded p-5 outline-dashed">
             <C />
