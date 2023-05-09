@@ -3,6 +3,44 @@ import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
 
 import F_server from './F.server';
+import G from './G';
+
+import { serverActionDBA } from './server-actions/serverActionG';
+import { sql, QueryResultRow } from '@vercel/postgres';
+
+async function queryB(a: string, d: string) {
+  const likeCondition = `%${a}%`;
+
+  if (d === 'desc') {
+    const {
+      rows,
+    }: {
+      rows: QueryResultRow &
+        {
+          id: number;
+          no: string;
+          name: string;
+          pos: string;
+        }[];
+    } =
+      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no desc;`;
+    return rows;
+  } else {
+    const {
+      rows,
+    }: {
+      rows: QueryResultRow &
+        {
+          id: number;
+          no: string;
+          name: string;
+          pos: string;
+        }[];
+    } =
+      await sql`SELECT * FROM players WHERE no LIKE ${likeCondition} OR name LIKE ${likeCondition} OR pos LIKE ${likeCondition} ORDER BY no asc;`;
+    return rows;
+  }
+}
 
 export default async function B() {
   const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
@@ -15,50 +53,28 @@ export default async function B() {
   //   await sleep(1000);
   // }
 
-  const result = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_API
-        ? process.env.NEXT_PUBLIC_API
-        : 'http://localhost:3000'
-    }/api/examples`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      next: { revalidate: 5 },
-    },
-  );
+  // 推奨 ORM (Ex. Prisma)
+  const rows = await queryB(a, d);
 
-  const json = await result.json();
-
-  console.log(`B ServerComponent a=${a} d=${d}`);
-
-  const examples = json
-    .filter((data: { name: string; pos: string }) => {
-      return data.name.includes(a) || data.pos.includes(a);
-    })
-    .sort((value: { id: string }, target: { id: string }) => {
-      if (d == 'asc') {
-        return value.id < target.id ? -1 : 1;
-      } else {
-        return value.id > target.id ? -1 : 1;
-      }
-    });
+  console.log(rows);
 
   return (
     <ul className="list-disc">
-      {examples.map(
-        ({ id, name, pos }: { id: string; name: string; pos: string }) => (
-          <li key={id} className="m-5">
-            {id} : {name} ({pos})
-            <Suspense fallback={<div>⏳</div>}>
-              {/* @ts-expect-error Async Server Component */}
-              <F_server id={id} name={name} pos={pos} />
-            </Suspense>
-          </li>
-        ),
-      )}
+      {rows.map(({ id, no, name, pos }) => (
+        <li key={id} className="m-5">
+          <G
+            id={id}
+            no={no}
+            name={name}
+            pos={pos}
+            serverActionDBA={serverActionDBA}
+          />
+          <Suspense fallback={<div>⏳</div>}>
+            {/* @ts-expect-error Async Server Component */}
+            <F_server id={id} name={name} pos={pos} />
+          </Suspense>
+        </li>
+      ))}
     </ul>
   );
 }
