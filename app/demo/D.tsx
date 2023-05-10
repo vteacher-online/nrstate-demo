@@ -1,6 +1,5 @@
 'use client';
 
-import { startTransition } from 'react';
 import { usePageState } from 'nrstate-client/PageStateClient';
 import { PageStateDemo, pathDemo } from './PageStateDemo';
 

@@ -1,7 +1,6 @@
 'use server';
 
 import { sql } from '@vercel/postgres';
-// import { revalidateTag } from 'next/cache';
 
 export async function serverActionDBA({
   id,
@@ -73,15 +72,20 @@ export async function serverActionDBA({
 
   */
 
-  console.log(`serverActionDBA: id=${id} no=${no} name=${name} pos=${pos}`);
-
   // 推奨 ORM (Ex. Prisma)
-  const result =
+  const { command, rowCount } =
     await sql`UPDATE players SET no=${no}, name=${name}, pos=${pos} WHERE id=${id}`;
 
-  console.log(result);
+  // const pageState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
+  // experimental_setPageState<PageStateDemo>(
+  //   {
+  //     ...pageState,
+  //   },
+  //   pathDemo,
+  //   () => {
+  //     revalidateTag(tag);
+  //   },
+  // );
 
-  // revalidateTag(tag);
-
-  return '{status: 200}';
+  return `{command: ${command}, rowCount: ${rowCount}}`;
 }
