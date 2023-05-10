@@ -43,8 +43,8 @@ async function queryB(a: string, d: string) {
 }
 
 export default async function B() {
-  const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
-  const { a, d } = appState;
+  const pageState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
+  const { a, d } = pageState;
 
   // {
   //   // test
@@ -55,8 +55,6 @@ export default async function B() {
 
   // 推奨 ORM (Ex. Prisma)
   const rows = await queryB(a, d);
-
-  console.log(rows);
 
   return (
     <ul className="list-disc">

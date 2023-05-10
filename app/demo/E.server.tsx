@@ -1,7 +1,7 @@
 import { getPageState } from 'nrstate/PageStateServer';
 import { PageStateDemo, initialPageStateDemo, pathDemo } from './PageStateDemo';
-import getTrademark from './libs/trademark';
-import getAdWords from './libs/adwords';
+import getTrademark from './lib/trademark';
+import getAdWords from './lib/adwords';
 
 export default async function E() {
   const appState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);

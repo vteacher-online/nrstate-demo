@@ -23,8 +23,8 @@ specifiers:
   ms: 3.0.0-canary.1
   next: 13.4.1
   nookies: 2.5.2
-  nrstate: 1.0.1
-  nrstate-client: 1.0.1
+  nrstate: 1.0.2
+  nrstate-client: 1.0.2
   postcss: 8.4.20
   prettier: 2.8.1
   prettier-plugin-tailwindcss: 0.2.1
@@ -48,8 +48,8 @@ dependencies:
   ms: 3.0.0-canary.1
   next: 13.4.1_biqbaboplfbrettd7655fr4n2y
   nookies: 2.5.2
-  nrstate: 1.0.1
-  nrstate-client: 1.0.1
+  nrstate: 1.0.2
+  nrstate-client: 1.0.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   styled-components: 6.0.0-beta.2_biqbaboplfbrettd7655fr4n2y
@@ -4644,15 +4644,15 @@ packages:
       path-key: 4.0.0
     dev: true
 
-  /nrstate-client/1.0.1:
+  /nrstate-client/1.0.2:
     resolution:
       {
-        integrity: sha512-HzllWKtlfa/o+xYGhTZ8jaQhuoDr5RDTvZttXLvAADaFBSt9uD2ZZmeJg6+DmNStuNqa3/XL5Alp154XCXkyWA==,
+        integrity: sha512-5I2hDY43joLZTZQcnlz+MM+TU2MadhRq6BgCto0mboSjesTKI09rqeDb9GXSjdFyNk06n2j0cRgbFJ8OeWz9IQ==,
       }
     dependencies:
       next: 13.4.1_biqbaboplfbrettd7655fr4n2y
       nookies: 2.5.2
-      nrstate: 1.0.1
+      nrstate: 1.0.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       typescript: 5.0.4
@@ -4665,10 +4665,10 @@ packages:
       - sass
     dev: false
 
-  /nrstate/1.0.1:
+  /nrstate/1.0.2:
     resolution:
       {
-        integrity: sha512-gcmWAAgFi1YStt52Fwc2B3Aa97UyX8L9KxmRglYTftb5ahOJ4ME9/Iefv7YwBKSSB7xYtw/ZTuagjRgCjXC/DQ==,
+        integrity: sha512-xtyPLYrmv6k5KhmjcrMVk4Wn50AFPxptq/MF4ZjLWr2RR8zkNNPsEafmXr10iEM5wIWhnKE+8JJ3vuB/pFi47Q==,
       }
     dependencies:
       next: 13.4.1_biqbaboplfbrettd7655fr4n2y
