@@ -51,19 +51,24 @@ export default function G({
               pos: formData.get('pos'),
             } as z.infer<typeof ValidationSchema>);
 
-            const result = await serverActionDBA({
-              id: Number(formData.get('id')),
-              no: formData.get('no')?.toString() ?? '',
-              name: formData.get('name')?.toString() ?? '',
-              pos: formData.get('pos')?.toString() ?? '',
-              tag: `${getPageLocation(
-                pathDemo,
-              )}&id=${id}&no=${no}&name=${name}&pos=${pos}`,
-            });
+            if (process.env.NEXT_PUBLIC_POSTGRES) {
+              const result = await serverActionDBA({
+                id: Number(formData.get('id')),
+                no: formData.get('no')?.toString() ?? '',
+                name: formData.get('name')?.toString() ?? '',
+                pos: formData.get('pos')?.toString() ?? '',
+                tag: `${getPageLocation(
+                  pathDemo,
+                )}&id=${id}&no=${no}&name=${name}&pos=${pos}`,
+              });
 
-            console.log(result);
+              console.log(result);
 
-            setInfo('Ran query successfully!');
+              setInfo('Ran query successfully!');
+            } else {
+              setInfo('Ran validation successfully!');
+            }
+
             setTimeout(() => setInfo(''), 1500);
             setError('');
           } catch (error) {
@@ -101,9 +106,15 @@ export default function G({
           defaultValue={pos}
         />
         <div className="inline w-1/5">
-          <button className="w-16 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700">
-            Save
-          </button>
+          {process.env.NEXT_PUBLIC_POSTGRES ? (
+            <button className="w-fit rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700">
+              Mutate
+            </button>
+          ) : (
+            <button className="w-fit rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700">
+              Validate
+            </button>
+          )}
         </div>
         {info && <div className="text-blue-600">{info}</div>}
         {error && <div className="text-red-600">{error}</div>}
