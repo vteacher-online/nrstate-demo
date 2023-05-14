@@ -10,30 +10,38 @@
 
 [Next.js App Router Playground](https://github.com/vercel/app-playground)
 
-1. Install dependencies:
+### 1. Install dependencies:
 
 ```sh
 pnpm install
 ```
 
-2. Edit `.env.local`:
+### 2. DB Setup:
 
+- Vercel Postgres  
+  https://vercel.com/docs/storage/vercel-postgres
+  - Edit `.env.local`
+  ```sh
+  cp .env.example .env.local
+  ```
+  - seed
+    - postgres/seed.md
+
+#### Setup without DB (optional)
+
+- .env.local
+
+```sh
+NEXT_PUBLIC_POSTGRES="false"
 ```
-NEXT_PUBLIC_API=
 
-POSTGRES_URL=
-POSTGRES_PRISMA_URL=
-POSTGRES_URL_NON_POOLING=
-POSTGRES_USER=
-POSTGRES_HOST=
-POSTGRES_PASSWORD=
-POSTGRES_DATABASE=
-```
-
-3. Start the dev server:
+### 3. Start the dev server:
 
 ```sh
 pnpm dev
 ```
 
-http://localhost:3000
+Then, http://localhost:3000
+
+- Demo app on Vercel  
+  https://nrstate-demo.vercel.app/demo

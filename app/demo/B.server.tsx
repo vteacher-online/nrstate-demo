@@ -42,6 +42,39 @@ async function queryB(a: string, d: string) {
   }
 }
 
+async function apiB(a: string, d: string) {
+  const result = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_API
+        ? process.env.NEXT_PUBLIC_API
+        : 'http://localhost:3000'
+    }/api/players`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: { revalidate: 5 },
+    },
+  );
+
+  const json = await result.json();
+
+  const players = json
+    .filter((data: { name: string; pos: string }) => {
+      return data.name.includes(a) || data.pos.includes(a);
+    })
+    .sort((value: { id: string }, target: { id: string }) => {
+      if (d == 'asc') {
+        return value.id < target.id ? -1 : 1;
+      } else {
+        return value.id > target.id ? -1 : 1;
+      }
+    });
+
+  return players;
+}
+
 export default async function B() {
   const pageState = getPageState<PageStateDemo>(initialPageStateDemo, pathDemo);
   const { a, d } = pageState;
@@ -53,8 +86,19 @@ export default async function B() {
   //   await sleep(1000);
   // }
 
-  // 推奨 ORM (Ex. Prisma)
-  const rows = await queryB(a, d);
+  let rows: QueryResultRow &
+    {
+      id: number;
+      no: string;
+      name: string;
+      pos: string;
+    }[] = [];
+  if (process.env.NEXT_PUBLIC_POSTGRES) {
+    // ORM (Ex. Prisma)
+    rows = await queryB(a, d);
+  } else {
+    rows = await apiB(a, d);
+  }
 
   return (
     <ul className="list-disc">
