@@ -22,7 +22,7 @@ export default async function Page() {
         )}
       >
         <div className="p-5">
-          <div className="float-left w-1/4 rounded p-5 outline-dashed">
+          <div className="float-left w-full rounded p-5 sm:w-1/4 sm:outline-dashed">
             <C />
             <E>
               <Suspense fallback={<div>⏳</div>}>
@@ -31,7 +31,7 @@ export default async function Page() {
               </Suspense>
             </E>
           </div>
-          <div className="float-right w-3/4 rounded p-5 outline-dashed">
+          <div className="float-right w-full rounded p-5 sm:w-3/4 sm:outline-dashed">
             <div className="rounded p-5 outline-dashed">
               <A />
               <D />

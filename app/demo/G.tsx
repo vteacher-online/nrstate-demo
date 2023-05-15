@@ -96,13 +96,13 @@ export default function G({
         <input
           name="name"
           type="text"
-          className="w-2/5 rounded border-gray-200"
+          className="w-full rounded border-gray-200 sm:w-2/5"
           defaultValue={name}
         />
         <input
           name="pos"
           type="text"
-          className="w-1/5 rounded border-gray-200"
+          className="w-full rounded border-gray-200 sm:w-1/5"
           defaultValue={pos}
         />
         <div className="inline w-1/5">
