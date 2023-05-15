@@ -13,7 +13,7 @@ export default function A() {
     <div className="w-full rounded p-5 outline-dashed">
       <p>A</p>
       <input
-        className="w-11/12 rounded border-gray-200"
+        className="w-full rounded border-gray-200 sm:w-11/12"
         type="text"
         defaultValue={a}
         onChange={(e) => {
@@ -21,7 +21,7 @@ export default function A() {
         }}
       />
       <button
-        className="w-1/12 rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700 "
+        className="w-fit rounded bg-blue-500 p-2 font-bold text-white hover:bg-blue-700 sm:w-1/12 "
         onClick={() => {
           setPageState(
             {
