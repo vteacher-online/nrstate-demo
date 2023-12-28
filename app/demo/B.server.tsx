@@ -93,7 +93,7 @@ export default async function B() {
       name: string;
       pos: string;
     }[] = [];
-  if (process.env.NEXT_PUBLIC_POSTGRES) {
+  if (process.env.NEXT_PUBLIC_POSTGRES === 'true') {
     // ORM (Ex. Prisma)
     rows = await queryB(a, d);
   } else {
